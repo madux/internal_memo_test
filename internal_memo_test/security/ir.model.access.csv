@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_memo_payment,access_memo_payment,model_internal_memo_custom,,1,1,1,1
+access_memo_message,access_memo_message,model_send_memo_message,,1,1,1,1
+access_memo_request,access_memo_request,model_send_memo_request,,1,1,1,1
+access_memo_back,access_memo_back,model_send_memo_back,,1,1,1,1

@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id ="internal_memo_form_view_2" model ="ir.ui.view">
+            <field name="name">Internal Memo View2</field>
+
+            <field name="model">internal.memo.custom</field>
+            <field eval="25" name="priority"/>
+            <field name ="arch" type="xml">
+                <form string="Internal Memo">
+                <header>
+                    <button name="button_employee_headunit" states="submit" string="Submit HOU" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_emp"/>
+                    <button name="button_hou_gmanager" states="headunit" string="Submit to GM"
+                            type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_manager"/>
+
+                    <button name="button_gm_ed" states="manager" string="Post to ED/CEO" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+                    <button name="button_coo_ed_account" states="coo" string="Post to Accounts" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_coo"/>
+                    <button name="button_account_post" states="account" string="Post" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_account"/>
+                    <button name="button_ed_to_coo" states="ed" string="Post CEO/Account" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_ed"/>
+                    <button name="send_Gmanager_ed_coo_submit" states="submit" string="Submit ED/CEO" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+
+<!--<button name="button_ed_to_acc" states="ed" string="Post to Accounts" type="object"
+class="btn-primary" attrs="{'invisible':[('amountfig '<=', 1,000,000')]}" groups="internal_memo_test.group_memo_xx_ed"/>-->
+                    <button name="send_direct_message" states="manager,headunit" string="Send Mail" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_emp,internal_memo_test.group_memo_xx_admin,internal_memo_test.group_memo_xx_manager"/>
+
+                    <button name="refused_ed" states="ed" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_ed"/>
+                    <button name="refused_manager" states="headunit" string="Reject." type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_manager"/>
+                    <button name="refused_manager" states="manager" string="Refuse" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin,internal_memo_test.group_memo_xx_ed"/>
+                    <button name="refuse_account" states="account" string="Refuse(A)" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_account"/>
+                    <button name="refuse_coo" states="coo" string="Refuse(C)" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_coo"/>
+                    <button name="button_cancel" states="refused" string="Set to Draft" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_coo,internal_memo_test.group_memo_xx_manager,internal_memo_test.group_memo_xx_account,internal_memo_test.group_memo_xx_admin"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="submit,headunit,manager,coo,account" /><!--statusbar_visible="draft,reported,done,refused"-->
+
+                    <button name="button_refund_customer" string="Refund" type="object" class="oe_highlight" attrs="{'invisible':['|',('state','not in', 'account'),('payment_mode','not in', 'csr')]}" groups="internal_memo_test.group_memo_xx_account"/><!-- attrs="{'invisible':[('payment_mode','not in', 'csr')]}" groups="internal_memo_test.memo_group_account"/>-->
+                    <button name="button_pay_supplier" string="Supplier payment" type="object" class="oe_highlight" attrs="{'invisible':['|',('state','not in', 'account'),('payment_mode','not in', 'sp')]}" groups="internal_memo_test.group_memo_xx_account"/> <!--attrs="{'invisible':[('payment_mode','not in', 'sp')]}" groups="internal_memo_test.memo_group_account"/>-->
+                    <button name="button_dla_pay" string="DL Payment" type="object" class="oe_highlight" attrs="{'invisible':['|',('state','not in', 'account'),('payment_mode','not in', 'dla')]}" groups="internal_memo_test.group_memo_xx_account"/> <!--attrs="{'invisible':[('payment_mode','not in', 'dla')]}" groups="internal_memo_test.memo_group_account"/>-->
+
+                    <!--<button name="manager_submit" states="approve" type="object" string="Post to COO" class="oe_highlight" groups="internal_memo_test.memo_group_account" attrs="{'invisible': [('state', '=','draft')]}"/>
+                    <button name="coo_submit" states="coo" string="Post to Accounts" type="object" class="oe_highlight" groups="hr.group_hr_manager"/>
+                    <button name="button_refused" states="approve,coo" string="Reject" type="object" class="oe_highlight" groups="hr.group_hr_manager"/>
+                    <button name="button_cancel" states="refused,approve" string="Cancel" type="object" class="btn-primary" groups="hr.group_hr_manager"/>
+
+                    <button name="onye_ogu_ego_mba" states="account" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.memo_group_manager"/>
+                    <button name="button_account_submit" states="account" string="Confirm" type="object" class="btn-primary" groups="internal_memo_test.memo_group_manager"/>
+
+                   <button name="button_pay_supplier" states="post" string="Supplier payment" type="object" class="oe_highlight"/>
+                    <button name="button_refund_customer" states="post" string="Refund" type="object" class="oe_highlight"/>
+                    <button name="button_dla_pay" string="DL Payment" type="object" class="btn-primary"/>-->
+
+
+                    <!--<button name="button_refund_customer" string="Refund" type="object" class="oe_highlight" attrs="{'invisible':[('state','not in','post'),('payment_mode','not in', 'csr')]}"/>
+                    <button name="button_pay_supplier" string="Supplier payment" type="object" class="oe_highlight" attrs="{'invisible':[('state','not in','post'),('payment_mode','not in', 'sp')]}" groups="hr_expense.group_hr_expense_user"/>
+                    <button name="button_dla_pay" string="DL Payment" type="object" class="oe_highlight" attrs="{'invisible':[('state','not in','post'),('payment_mode','not in', 'dla')]}" groups="hr_expense.group_hr_expense_user"/>
+-->
+                                        <!--<button name="button_pay_supplier"string="Supplier payment" type="object" class="oe_highlight" attrs="{'invisible':['|',('state','=','post'),('payment_mode','=', 'csr')]}"/>
+                    <button name="button_dla_pay" string="DL Payment" type="object" class="btn-primary" attrs="{'invisible':['|',('state','=','post'),('payment_mode','=', 'csr')]}"/>-->
+                    </header>
+                <sheet>
+                   <div class="oe_button_box">
+                        <button name="action_get_attachment_view"
+                            class="oe_stat_button"
+                            icon="fa-book"
+                            type="object">
+                            <field name="attachment_number" widget="statinfo" string="Documents"/>
+                        </button>
+                    </div>
+
+                   <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Description"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="employee_id" attrs="{'readonly':[('state','in',['headunit','manager','ed','coo','account','post','done'])]}"/>
+                            <field name="dept_ids"/>
+                            <field name="to_partner"/><!-- widget="many2many_tags"/>-->
+
+
+                             </group>
+
+
+                        <group>
+
+                            <field name="date"/>
+                            <field name="vendor_bill" attrs="{'readonly':[('state','in',['headunit','manager','ed','coo','account','post','done'])]}"/>
+                            <field name="origin_ref" attrs="{'readonly':[('state','in',['account','post','done'])]}"/>
+                            <field name="amountfig" />
+                            <field name="project_id"/>
+                            <field name="file_upload"/>
+
+
+                        </group>
+                        <group>
+
+                            <label for="payment_mode"/>
+                            <div>
+                                <field name="payment_mode" widget="radio" attrs="{'readonly':[('state','in',['headunit','manager','ed','coo','account','post','done'])]}"/>
+                            </div>
+                        </group>
+
+
+                    </group>
+                    <notebook>
+                    <page name='add_note' string='Memo Comment'>
+                        <field name="description" string = "Add Notes" placeholder="Notes..." widget="html"/>
+                    </page>
+                    <page name='add_note_two' string='Refusal Reasons'>
+                        <field name="description_two" readonly="0" Placeholder="Reason..."/>
+                    </page>
+                    </notebook>
+                </sheet>
+                <!--<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>-->
+                <div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_initernal_memo_view2" model="ir.ui.view">
+            <field name="name">Internal Memo Tree</field>
+            <field name="model">internal.memo.custom</field>
+            <field name="arch" type="xml">
+                <tree string="Memo Payments" colors="red:state == 'account';black:state == 'manager';green:state == 'coo';grey:state == 'refused';">
+
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="vendor_bill"/>
+
+                    <field name="state"/>
+
+                    <button name="action_get_attachment_view" string="View Attached Documents" type="object" icon="fa-paperclip"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="internal_memo_search_view">
+      	<field name="name">Internal Memo Search</field>
+		    <field name="model">internal.memo.custom</field>
+		    <field name="arch" type="xml">
+				 <search string="Internal Memo Filter">
+
+						<field name="name"/>
+						<field name="origin_ref" />
+						<field name="state" />
+                        <field name="date" />
+
+					 <group expand="0" string="Group By">
+				       <filter string="Name" icon="terp-personal" domain="[]" context="{'group by':'name'}" />
+				       <filter string="Reference Number" icon="terp-personel" domain="[]" context="{'group by':'origin_ref'}" />
+					   <filter string="State" icon="terp-personel" domain="[]" context="{'group by':'state'}" />
+                       <filter string="Date" icon="terp-personal" domain="[]" context="{'group by':'date'}" />
+                    </group>
+			  </search>
+		 	</field>
+	  </record>
+
+
+        <record id="memo_refuse_wizard" model="ir.ui.view">
+            <field name="name">Memo Message</field>
+            <field name="model">send.memo.message</field>
+            <field name="arch" type="xml">
+                <form String="Reason for Refusal">
+                    <group>
+                        <group>
+                            <field name="memo_record" readonly="1"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="resp" readonly="0"  invisible="1"/>
+                        </group>
+                            <field name="reason" required="1" placeholder="Please Add Reason(s) ..." colspan="4"/>
+                    <footer>
+                        <button name="post_refuse" type="object" string="Refuse" class="oe_highlight"/>
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id ="internal_memo_request_form_view_3" model ="ir.ui.view">
+            <field name="name">Internal Memo Request</field>
+
+            <field name="model">send.memo.request</field>
+            <field eval="25" name="priority"/>
+            <field name ="arch" type="xml">
+                <form string="Internal Memo Request">
+                <header>
+                    <button name="submit_manager" states="submit" string="Submit HOU" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_emp"/>
+                    <button name="submitHouManager" states="headunit" string="Submit to GM" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_manager"/>
+
+                    <button name="submitGmEdCoo" states="manager" string="ED/CEO" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+                    <button name="submitEdCoo" states="ed" string="Post to Approve/CEO" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_ed"/>
+                    <button name="send_Gmanager_ed_coo_submit" states="submit" string="Submit ED/CEO" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+
+                    <button name="submitCooApp" states="coo" string="Approve" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_coo"/>
+                    <button name="approval" states="approved" string="Register Procurement" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_account"/>
+
+                    <button name="refuse_hou" states="headunit" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_manager"/>
+                    <button name="refuse_gm" states="manager" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+                    <button name="refuse_ed" states="ed" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_ed"/>
+                    <button name="refuse_coo" states="coo" string="Reject" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_coo"/>
+
+                    <button name="set_draft" states="refused" string="Set Draft" type="object" class="btn-primary" groups="internal_memo_test.group_memo_xx_admin"/>
+                    <field name="state" widget="statusbar" statusbar_visible="submit,headunit,manager,coo,approved" /><!--statusbar_visible="draft,reported,done,refused"-->
+
+                    </header>
+                    <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Description"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="employee_id" attrs="{'readonly':[('state','in',['headunit','manager','ed','coo','account','post','done'])]}"/>
+                                <field name="dept_ids"/>
+                                <field name="invoice_ref"/>
+                                <field name = "users_followers" widget="many2many_tags" required="1"/>
+                            </group>
+
+                            <group>
+
+                                <field name="date"/>
+                                <field name="amountfig" string="Amount" readonly="1" />
+                                <field name="project_id"/>
+                                <field name="file_upload"/>
+
+
+                            </group>
+
+
+                        </group>
+                        <notebook>
+                        <page name='add_note' string='Memo Comment'>
+                            <field name="description" string = "Add Notes" placeholder="Notes..." widget="html"/>
+                        </page>
+
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+                </form>
+            </field>
+        </record>
+
+        <record id="tree_initernal_memo_request_view2" model="ir.ui.view">
+            <field name="name">Internal Memo Request Tree</field>
+            <field name="model">send.memo.request</field>
+            <field name="arch" type="xml">
+                <tree string="Memo Payments" colors="black:state == 'manager';green:state == 'coo';grey:state == 'refused';">
+
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="internal_memo_request_search_view">
+      	<field name="name">Internal Memo Request Search</field>
+		    <field name="model">send.memo.request</field>
+		    <field name="arch" type="xml">
+				 <search string="Internal Memo Filter">
+
+						<field name="name"/>
+						<field name="state" />
+                        <field name="date" />
+
+					 <group expand="0" string="Group By">
+				       <filter string="Name" icon="terp-personal" domain="[]" context="{'group by':'name'}" />
+					   <filter string="State" icon="terp-personel" domain="[]" context="{'group by':'state'}" />
+                       <filter string="Date" icon="terp-personal" domain="[]" context="{'group by':'date'}" />
+                    </group>
+			  </search>
+		 	</field>
+	  </record>
+
+
+
+        <!--<record model="ir.ui.view" id="purchase_order_confirm_button" >
+            <field name="name">purchase.order</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+
+                <header>
+                    <xpath expr="//button[@name='button_confirm']" position="replace">
+                            <button name="button_confirm" type="object" states="sent" string="Confirm Order" class="oe_highlight" id="bid_confirm"/>
+                    </xpath>
+                    </header>
+                    <xpath expr="//field[@name='date_order']" position="after">
+                        <field name="memo_id" invisible="0" readonly="1"/>
+                    </xpath>
+
+
+            </field>
+        </record> -->
+
+<act_window id="internal_memo_action2"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action3"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'submit')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action4"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'headunit')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action5"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'manager')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action6"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'ed')]"
+view_mode="tree,form"/>
+
+
+<act_window id="internal_memo_action7"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'coo')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action8"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'account')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action9"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'refused')]"
+view_mode="tree,form"/>
+
+<act_window id="internal_memo_action10"
+name="Internal Memo Payment"
+res_model="internal.memo.custom"
+domain="[('state', '=', 'done')]"
+view_mode="tree,form"/>
+
+
+<act_window id="internal_memo_request_action"
+name="Internal Memo Request"
+res_model="send.memo.request"
+view_mode="tree,form"/>
+
+
+
+<menuitem id="internal_memo_menu_main2" name="Memo" action = "internal_memo_request_action" sequence = "3"/>
+
+
+        <menuitem id="internal_memo_menu_one2" name="Internal Memo Type"
+            parent="internal_memo_menu_main2"/>
+            <menuitem id="internal_memo_menu_request" name="Memo Request"
+            parent="internal_memo_menu_one2" action="internal_memo_request_action"/>
+
+
+            <menuitem id="internal_memo_menu_two2" name="Payment Memo"
+            parent="internal_memo_menu_one2" action = "internal_memo_action2"/>
+
+
+            <menuitem id="internal_memo_menu_one_stage" name="Stage Counts"
+            parent="internal_memo_menu_two2"/>
+
+
+            <menuitem id="internal_memo_menu_two3" name="Draft"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action3"/>
+
+            <menuitem id="internal_memo_menu_two4" name="HOU"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action4"/>
+
+            <menuitem id="internal_memo_menu_two5" name="General Manager"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action5"/>
+
+            <menuitem id="internal_memo_menu_two6" name="ED"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action6"/>
+
+            <menuitem id="internal_memo_menu_two7" name="COO"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action7"/>
+
+            <menuitem id="internal_memo_menu_two8" name="Accounts"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action8"/>
+
+            <menuitem id="internal_memo_menu_two9" name="Refused"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action9"/>
+
+            <menuitem id="internal_memo_menu_two10" name="Paid"
+            parent="internal_memo_menu_one_stage" action = "internal_memo_action10"/>
+
+    </data>
+</odoo>
